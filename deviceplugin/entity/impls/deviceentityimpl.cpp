@@ -366,3 +366,13 @@ GetInnerStartPeriodResponse DeviceEntityImpl::getInnerStartPeriod(GetInnerStartP
 
     return response;
 }
+
+GetInnerStartWidthResponse DeviceEntityImpl::getInnerStartWidth(GetInnerStartWidthRequest request) {
+    GetInnerStartWidthResponse response;
+
+    if (_current_state != nullptr) {
+        response = _current_state->getInnerStartWidth(request);
+    }
+
+    return response;
+}

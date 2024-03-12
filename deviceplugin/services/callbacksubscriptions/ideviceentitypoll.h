@@ -22,6 +22,7 @@ class IDeviceEntityPoll: public QObject, public IProcessable {
   virtual void channelEnabledStatusesPoll() = 0;
   virtual void channelInvertedStatusesPoll() = 0;
 
-    virtual void innerStartPeriodPoll() = 0;
+  virtual void innerStartPeriodPoll() = 0;
+  virtual void innerStartWidthPoll() = 0;
 };
 #endif //OU6UDEVICESTANDALONEPLUGIN_DEVICEPLUGIN_SERVICES_CALLBACKSUBSCRIPTIONS_IDEVICEENTITYPOLL_H_

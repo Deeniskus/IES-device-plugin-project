@@ -26,6 +26,7 @@
 #include "deviceplugin/managementpart/usecase/channel/getchannelstartmodeusecase.h"
 
 #include "deviceplugin/managementpart/usecase/innerstart/getinnerstartperiodusecase.h"
+#include "deviceplugin/managementpart/usecase/innerstart/getinnerstartwidthusecase.h"
 
 class UseCaseFactory: public QObject {
   Q_OBJECT
@@ -52,7 +53,8 @@ class UseCaseFactory: public QObject {
   std::shared_ptr<SetChannelStartSourceUseCase> createSetChannelStartSourceUseCase();
   std::shared_ptr<SetChannelStartModeUseCase> createSetChannelStartModeUseCase();
 
-  std::shared_ptr<GetInnerStartPeriodUseCase> createGetInnerStartPeriodUseCase();
+    std::shared_ptr<GetInnerStartPeriodUseCase> createGetInnerStartPeriodUseCase();
+    std::shared_ptr<GetInnerStartWidthUseCase> createGetInnerStartWidthUseCase();
 
 
     // TODO: Дописать методы создания и получения юзкейсов
@@ -80,6 +82,7 @@ class UseCaseFactory: public QObject {
   std::shared_ptr<GetChannelStartModeUseCase> _get_channel_start_mode_use_case = nullptr;
 
   std::shared_ptr<GetInnerStartPeriodUseCase> _get_inner_start_period_use_case = nullptr;
+  std::shared_ptr<GetInnerStartWidthUseCase> _get_inner_start_width_use_case = nullptr;
 };
 
 #endif //OU6UDEVICESTANDALONEPLUGIN_DEVICEPLUGIN_MANAGEMENTPART_USECASE_USECASEFACTORY_H_

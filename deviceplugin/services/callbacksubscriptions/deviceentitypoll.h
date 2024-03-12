@@ -32,6 +32,7 @@ class DeviceEntityPoll: public IDeviceEntityPoll {
   void channelInvertedStatusesPoll() override;
 
   void innerStartPeriodPoll() override;
+  void innerStartWidthPoll() override;
 
  private:
   std::shared_ptr<DeviceEntity> _device_entity = nullptr;

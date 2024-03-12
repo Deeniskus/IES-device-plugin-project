@@ -34,6 +34,7 @@ void DeviceEntityPoll::process() {
   SyncSFPStatusesPoll();
 
   innerStartPeriodPoll();
+  innerStartWidthPoll();
 
   channelDelaysPoll();
   channelWidthsPoll();
@@ -268,6 +269,25 @@ void DeviceEntityPoll::innerStartPeriodPoll() {
 
         if (_callback_sub_factory != nullptr) {
             auto callback = _callback_sub_factory->getInnerStartPeriodCallback();
+            if (callback != nullptr) {
+                callback->pushEvent(response.result);
+            }
+        }
+    }
+}
+
+void DeviceEntityPoll::innerStartWidthPoll() {
+    if (_device_entity != nullptr) {
+        GetInnerStartWidthRequest request{};
+        auto response = _device_entity->getInnerStartWidth(request);
+
+        if (response.error_code != SUCCESS) {
+            // TODO: Здесь обработать ошибку
+            return ;
+        }
+
+        if (_callback_sub_factory != nullptr) {
+            auto callback = _callback_sub_factory->getInnerStartWidthCallback();
             if (callback != nullptr) {
                 callback->pushEvent(response.result);
             }

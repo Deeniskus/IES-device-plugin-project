@@ -254,3 +254,13 @@ GetInnerStartPeriodResponse DeviceEntityConnectedStateStandaloneImpl1::getInnerS
 
     return response;
 }
+
+GetInnerStartWidthResponse DeviceEntityConnectedStateStandaloneImpl1::getInnerStartWidth(GetInnerStartWidthRequest request) {
+    GetInnerStartWidthResponse response;
+
+    if (_reg_card != nullptr) {
+        response = _reg_card->getInnerStartWidth(request);
+    }
+
+    return response;
+}

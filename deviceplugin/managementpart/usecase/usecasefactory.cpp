@@ -220,3 +220,13 @@ std::shared_ptr<GetInnerStartPeriodUseCase> UseCaseFactory::createGetInnerStartP
 
     return _get_inner_start_period_use_case;
 }
+
+std::shared_ptr<GetInnerStartWidthUseCase> UseCaseFactory::createGetInnerStartWidthUseCase() {
+    std::shared_ptr<GetInnerStartWidthUseCase> result = nullptr;
+
+    if (_get_inner_start_width_use_case == nullptr) {
+        _get_inner_start_width_use_case = std::make_shared<GetInnerStartWidthUseCase>(_device_entity);
+    }
+
+    return _get_inner_start_width_use_case;
+}

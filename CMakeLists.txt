@@ -101,7 +101,7 @@ file(GLOB TEST_DEVICE_SRC
         "${CMAKE_SOURCE_DIR}/test/*.cpp"
         )
 
-add_library(${PLUGIN_NAME} SHARED ${TEST_DEVICE_SRC} deviceplugin/managementpart/usecase/innerstart/getinnerstartperiodusecase.h deviceplugin/managementpart/usecase/innerstart/getinnerstartperiodusecase.h)
+add_library(${PLUGIN_NAME} SHARED ${TEST_DEVICE_SRC})
 target_link_libraries(${PLUGIN_NAME}
         Qt5::Widgets
         utils::utils
@@ -118,7 +118,7 @@ target_compile_options(${PLUGIN_NAME} PRIVATE ${COMPILE_OPTIONS})
 file(GLOB TEST_EXEC_SRC
         "${CMAKE_SOURCE_DIR}/test/*.cpp"
         )
-add_executable(${PROJECT_NAME} ${SRC} ${TEST_EXEC_SRC} main.cpp deviceplugin/managementpart/usecase/innerstart/getinnerstartperiodusecase.h)
+add_executable(${PROJECT_NAME} ${SRC} ${TEST_EXEC_SRC} main.cpp)
 
 
 target_link_libraries(${PROJECT_NAME} ${PLUGIN_NAME})

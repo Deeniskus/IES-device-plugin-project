@@ -28,6 +28,7 @@ class DeviceController: public QObject {
 
  private slots:
 
+
   void channelNameChangedViewSlot(int channel_num, const QString &value);
   void channelEnabledStatusChangedViewSlot(int channel_num, bool value);
 
@@ -49,8 +50,9 @@ class DeviceController: public QObject {
   void channelInvertedStatusesModelChangedSlot(const QVector<bool> &value);
   void channelStartSourcesModelChangedSlot(const QVector<uint16_t> &value);
   void channelStartModesModelChangedSlot(const QVector<uint16_t> &value);
-  void innerStartPeriodModelChangedSlot(quint64 value);
 
+  void innerStartPeriodModelChangedSlot(quint64 value);
+  void innerStartWidthModelChangedSlot(quint64 value);
 };
 
 
