@@ -230,3 +230,13 @@ std::shared_ptr<GetInnerStartWidthUseCase> UseCaseFactory::createGetInnerStartWi
 
     return _get_inner_start_width_use_case;
 }
+
+std::shared_ptr<GetInnerStartEnabledStatusUseCase> UseCaseFactory::createGetInnerStartEnabledStatusUseCase() {
+    std::shared_ptr<GetInnerStartEnabledStatusUseCase> result = nullptr;
+
+    if (_get_inner_start_enabled_status_use_case == nullptr) {
+        _get_inner_start_enabled_status_use_case = std::make_shared<GetInnerStartEnabledStatusUseCase>(_device_entity);
+    }
+
+    return _get_inner_start_enabled_status_use_case;
+}

@@ -53,6 +53,7 @@ class DeviceController: public QObject {
 
   void innerStartPeriodModelChangedSlot(quint64 value);
   void innerStartWidthModelChangedSlot(quint64 value);
+  void innerStartEnabledStatusChangedSlot(bool value);
 };
 
 

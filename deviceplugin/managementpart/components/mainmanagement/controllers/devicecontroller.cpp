@@ -15,126 +15,134 @@ DeviceController::DeviceController(const std::shared_ptr<DeviceView> &test_devic
 }
 
 void DeviceController::setConnections() {
+
     if (_device_cb_factory != nullptr) {
-        auto inner_start_width_callback = _device_cb_factory->getInnerStartWidthCallback();
-        if (inner_start_width_callback != nullptr) {
-            QObject::connect(inner_start_width_callback.get(), &ULong64ValueCallback::statusChanged,
-                             this, &DeviceController::innerStartWidthModelChangedSlot);
+        auto inner_start_period_callback = _device_cb_factory->getInnerStartPeriodCallback();
+        if (inner_start_period_callback != nullptr) {
+            QObject::connect(inner_start_period_callback.get(), &ULong64ValueCallback::statusChanged,
+                             this, &DeviceController::innerStartPeriodModelChangedSlot);
         }
 
         if (_device_cb_factory != nullptr) {
-            auto inner_start_period_callback = _device_cb_factory->getInnerStartPeriodCallback();
-            if (inner_start_period_callback != nullptr) {
-                QObject::connect(inner_start_period_callback.get(), &ULong64ValueCallback::statusChanged,
-                                 this, &DeviceController::innerStartPeriodModelChangedSlot);
+            auto inner_start_width_callback = _device_cb_factory->getInnerStartWidthCallback();
+            if (inner_start_width_callback != nullptr) {
+                QObject::connect(inner_start_width_callback.get(), &ULong64ValueCallback::statusChanged,
+                                 this, &DeviceController::innerStartWidthModelChangedSlot);
             }
 
-            auto sync_des_lock_callback = _device_cb_factory->getSyncDesLockCallback();
-            if (sync_des_lock_callback != nullptr) {
-                QObject::connect(sync_des_lock_callback.get(), &BoolValueCallback::statusChanged,
-                                 this, &DeviceController::syncDesLockModelChangedSlot);
+            if (_device_cb_factory != nullptr) {
+                auto inner_start_period_callback = _device_cb_factory->getInnerStartPeriodCallback();
+                if (inner_start_period_callback != nullptr) {
+                    QObject::connect(inner_start_period_callback.get(), &ULong64ValueCallback::statusChanged,
+                                     this, &DeviceController::innerStartPeriodModelChangedSlot);
+                }
+
+                auto sync_des_lock_callback = _device_cb_factory->getSyncDesLockCallback();
+                if (sync_des_lock_callback != nullptr) {
+                    QObject::connect(sync_des_lock_callback.get(), &BoolValueCallback::statusChanged,
+                                     this, &DeviceController::syncDesLockModelChangedSlot);
+                }
+
+                auto sync_osc_lock_callback = _device_cb_factory->getSyncOscLockCallback();
+                if (sync_osc_lock_callback != nullptr) {
+                    QObject::connect(sync_osc_lock_callback.get(), &BoolValueCallback::statusChanged,
+                                     this, &DeviceController::syncOscLockModelChangedSlot);
+                }
+
+                auto sync_rx_loss_callback = _device_cb_factory->getSyncRxLossCallback();
+                if (sync_rx_loss_callback != nullptr) {
+                    QObject::connect(sync_rx_loss_callback.get(), &BoolValueCallback::statusChanged,
+                                     this, &DeviceController::syncRxLossModelChangedSlot);
+                }
+
+                auto sync_tx_fault_callback = _device_cb_factory->getSyncTxFaultCallback();
+                if (sync_tx_fault_callback != nullptr) {
+                    QObject::connect(sync_tx_fault_callback.get(), &BoolValueCallback::statusChanged,
+                                     this, &DeviceController::syncTxFaultModelChangedSlot);
+                }
+
+                auto sync_sfp_temp_callback = _device_cb_factory->getSyncSFPTempCallback();
+                if (sync_sfp_temp_callback != nullptr) {
+                    QObject::connect(sync_sfp_temp_callback.get(), &DoubleValueCallback::statusChanged,
+                                     this, &DeviceController::syncSFPTempModelChangedSlot);
+                }
+
+                auto sync_sfp_tx_voltage_callback = _device_cb_factory->getSyncSFPTxVoltageCallback();
+                if (sync_sfp_tx_voltage_callback != nullptr) {
+                    QObject::connect(sync_sfp_tx_voltage_callback.get(), &DoubleValueCallback::statusChanged,
+                                     this, &DeviceController::syncSFPTxVoltageModelChangedSlot);
+                }
+
+                auto sync_sfp_tx_amperage_callback = _device_cb_factory->getSyncSFPTxAmperageCallback();
+                if (sync_sfp_tx_amperage_callback != nullptr) {
+                    QObject::connect(sync_sfp_tx_amperage_callback.get(), &DoubleValueCallback::statusChanged,
+                                     this, &DeviceController::syncSFPTxAmperageModelChangedSlot);
+                }
+
+                auto sync_sfp_tx_optical_power_callback = _device_cb_factory->getSyncSFPTxOpticalPowerCallback();
+                if (sync_sfp_tx_optical_power_callback != nullptr) {
+                    QObject::connect(sync_sfp_tx_optical_power_callback.get(), &DoubleValueCallback::statusChanged,
+                                     this, &DeviceController::syncSFPTxOpticalPowerModelChangedSlot);
+                }
+
+                auto sync_sfp_rx_power_callback = _device_cb_factory->getSyncSFPRxPowerCallback();
+                if (sync_sfp_rx_power_callback != nullptr) {
+                    QObject::connect(sync_sfp_rx_power_callback.get(), &DoubleValueCallback::statusChanged,
+                                     this, &DeviceController::syncSFPRxPowerModelChangedSlot);
+                }
+
+                auto channel_delays_callback = _device_cb_factory->getChannelDelaysCallback();
+                if (channel_delays_callback != nullptr) {
+                    QObject::connect(channel_delays_callback.get(), &ULong64ValuesCallback::statusChanged,
+                                     this, &DeviceController::channelDelaysModelChangedSlot);
+                    qDebug() << "CHANNEL DELAYS CONNECTED";
+                }
+
+
+                auto channel_names_callback = _device_cb_factory->getChannelNameCallback();
+                if (channel_names_callback != nullptr) {
+                    QObject::connect(channel_names_callback.get(), &StringValuesCallback::statusChanged,
+                                     this, &DeviceController::channelNameModelChangedSlot);
+                    qDebug() << "CHANNEL Names CONNECTED";
+                }
+
+                auto channel_widths_callback = _device_cb_factory->getChannelWidthsCallback();
+                if (channel_widths_callback != nullptr) {
+                    QObject::connect(channel_widths_callback.get(), &ULong64ValuesCallback::statusChanged,
+                                     this, &DeviceController::channelWidthsModelChangedSlot);
+                }
+
+                auto channel_enabled_statuses_callback = _device_cb_factory->getChannelEnabledStatusesCallback();
+                if (channel_enabled_statuses_callback != nullptr) {
+                    QObject::connect(channel_enabled_statuses_callback.get(), &BoolValuesCallback::statusChanged,
+                                     this, &DeviceController::channelEnabledStatusesModelChangedSlot);
+                }
+
+                auto channel_inverted_statuses_callback = _device_cb_factory->getChannelInvertedStatusesCallback();
+                if (channel_inverted_statuses_callback != nullptr) {
+                    QObject::connect(channel_inverted_statuses_callback.get(), &BoolValuesCallback::statusChanged,
+                                     this, &DeviceController::channelInvertedStatusesModelChangedSlot);
+                }
+
+                auto channel_start_sources_callback = _device_cb_factory->getChannelStartSourcesCallback();
+                if (channel_start_sources_callback != nullptr) {
+                    QObject::connect(channel_start_sources_callback.get(), &UShortValuesCallback::statusChanged,
+                                     this, &DeviceController::channelStartSourcesModelChangedSlot);
+                }
+
+                auto channel_start_modes_callback = _device_cb_factory->getChannelStartModesCallback();
+                if (channel_start_modes_callback != nullptr) {
+                    QObject::connect(channel_start_modes_callback.get(), &UShortValuesCallback::statusChanged,
+                                     this, &DeviceController::channelStartModesModelChangedSlot);
+                }
             }
 
-            auto sync_osc_lock_callback = _device_cb_factory->getSyncOscLockCallback();
-            if (sync_osc_lock_callback != nullptr) {
-                QObject::connect(sync_osc_lock_callback.get(), &BoolValueCallback::statusChanged,
-                                 this, &DeviceController::syncOscLockModelChangedSlot);
+            if (_device_view != nullptr) {
+                QObject::connect(_device_view.get(), &DeviceView::channelEnabledChanged,
+                                 this, &DeviceController::channelEnabledStatusChangedViewSlot);
+                QObject::connect(_device_view.get(), &DeviceView::channelNameChanged,
+                                 this, &DeviceController::channelNameChangedViewSlot);
             }
-
-            auto sync_rx_loss_callback = _device_cb_factory->getSyncRxLossCallback();
-            if (sync_rx_loss_callback != nullptr) {
-                QObject::connect(sync_rx_loss_callback.get(), &BoolValueCallback::statusChanged,
-                                 this, &DeviceController::syncRxLossModelChangedSlot);
-            }
-
-            auto sync_tx_fault_callback = _device_cb_factory->getSyncTxFaultCallback();
-            if (sync_tx_fault_callback != nullptr) {
-                QObject::connect(sync_tx_fault_callback.get(), &BoolValueCallback::statusChanged,
-                                 this, &DeviceController::syncTxFaultModelChangedSlot);
-            }
-
-            auto sync_sfp_temp_callback = _device_cb_factory->getSyncSFPTempCallback();
-            if (sync_sfp_temp_callback != nullptr) {
-                QObject::connect(sync_sfp_temp_callback.get(), &DoubleValueCallback::statusChanged,
-                                 this, &DeviceController::syncSFPTempModelChangedSlot);
-            }
-
-            auto sync_sfp_tx_voltage_callback = _device_cb_factory->getSyncSFPTxVoltageCallback();
-            if (sync_sfp_tx_voltage_callback != nullptr) {
-                QObject::connect(sync_sfp_tx_voltage_callback.get(), &DoubleValueCallback::statusChanged,
-                                 this, &DeviceController::syncSFPTxVoltageModelChangedSlot);
-            }
-
-            auto sync_sfp_tx_amperage_callback = _device_cb_factory->getSyncSFPTxAmperageCallback();
-            if (sync_sfp_tx_amperage_callback != nullptr) {
-                QObject::connect(sync_sfp_tx_amperage_callback.get(), &DoubleValueCallback::statusChanged,
-                                 this, &DeviceController::syncSFPTxAmperageModelChangedSlot);
-            }
-
-            auto sync_sfp_tx_optical_power_callback = _device_cb_factory->getSyncSFPTxOpticalPowerCallback();
-            if (sync_sfp_tx_optical_power_callback != nullptr) {
-                QObject::connect(sync_sfp_tx_optical_power_callback.get(), &DoubleValueCallback::statusChanged,
-                                 this, &DeviceController::syncSFPTxOpticalPowerModelChangedSlot);
-            }
-
-            auto sync_sfp_rx_power_callback = _device_cb_factory->getSyncSFPRxPowerCallback();
-            if (sync_sfp_rx_power_callback != nullptr) {
-                QObject::connect(sync_sfp_rx_power_callback.get(), &DoubleValueCallback::statusChanged,
-                                 this, &DeviceController::syncSFPRxPowerModelChangedSlot);
-            }
-
-            auto channel_delays_callback = _device_cb_factory->getChannelDelaysCallback();
-            if (channel_delays_callback != nullptr) {
-                QObject::connect(channel_delays_callback.get(), &ULong64ValuesCallback::statusChanged,
-                                 this, &DeviceController::channelDelaysModelChangedSlot);
-                qDebug() << "CHANNEL DELAYS CONNECTED";
-            }
-
-
-            auto channel_names_callback = _device_cb_factory->getChannelNameCallback();
-            if (channel_names_callback != nullptr) {
-                QObject::connect(channel_names_callback.get(), &StringValuesCallback::statusChanged,
-                                 this, &DeviceController::channelNameModelChangedSlot);
-                qDebug() << "CHANNEL Names CONNECTED";
-            }
-
-            auto channel_widths_callback = _device_cb_factory->getChannelWidthsCallback();
-            if (channel_widths_callback != nullptr) {
-                QObject::connect(channel_widths_callback.get(), &ULong64ValuesCallback::statusChanged,
-                                 this, &DeviceController::channelWidthsModelChangedSlot);
-            }
-
-            auto channel_enabled_statuses_callback = _device_cb_factory->getChannelEnabledStatusesCallback();
-            if (channel_enabled_statuses_callback != nullptr) {
-                QObject::connect(channel_enabled_statuses_callback.get(), &BoolValuesCallback::statusChanged,
-                                 this, &DeviceController::channelEnabledStatusesModelChangedSlot);
-            }
-
-            auto channel_inverted_statuses_callback = _device_cb_factory->getChannelInvertedStatusesCallback();
-            if (channel_inverted_statuses_callback != nullptr) {
-                QObject::connect(channel_inverted_statuses_callback.get(), &BoolValuesCallback::statusChanged,
-                                 this, &DeviceController::channelInvertedStatusesModelChangedSlot);
-            }
-
-            auto channel_start_sources_callback = _device_cb_factory->getChannelStartSourcesCallback();
-            if (channel_start_sources_callback != nullptr) {
-                QObject::connect(channel_start_sources_callback.get(), &UShortValuesCallback::statusChanged,
-                                 this, &DeviceController::channelStartSourcesModelChangedSlot);
-            }
-
-            auto channel_start_modes_callback = _device_cb_factory->getChannelStartModesCallback();
-            if (channel_start_modes_callback != nullptr) {
-                QObject::connect(channel_start_modes_callback.get(), &UShortValuesCallback::statusChanged,
-                                 this, &DeviceController::channelStartModesModelChangedSlot);
-            }
-        }
-
-        if (_device_view != nullptr) {
-            QObject::connect(_device_view.get(), &DeviceView::channelEnabledChanged,
-                             this, &DeviceController::channelEnabledStatusChangedViewSlot);
-            QObject::connect(_device_view.get(), &DeviceView::channelNameChanged,
-                             this, &DeviceController::channelNameChangedViewSlot);
-        }
 //
 //
 //  auto positive_network_status_callback = device_cb_factory->getPositiveNetworkStatusCallback();
@@ -150,8 +158,16 @@ void DeviceController::setConnections() {
 //  }
 
 
+        }
     }
 }
+
+void DeviceController::innerStartEnabledStatusChangedSlot(bool value) {
+    if (_device_view != nullptr) {
+        _device_view->setInnerStartEnabledStatus(value);
+    }
+}
+
 void DeviceController::innerStartWidthModelChangedSlot(quint64 value) {
     if (_device_view != nullptr) {
         _device_view->setInnerStartWidth(value);

@@ -27,6 +27,7 @@ class DeviceEntityNotConnectedStateStandaloneImpl1: public DeviceEntityState {
 
     GetInnerStartPeriodResponse getInnerStartPeriod(GetInnerStartPeriodRequest request) override;
     GetInnerStartWidthResponse getInnerStartWidth(GetInnerStartWidthRequest request) override;
+    GetInnerStartEnabledStatusResponse getInnerStartEnabledStatus(GetInnerStartEnabledStatusRequest request) override;
 
   ErrorCode loadDeviceDTO(const std::shared_ptr<DeviceEntityDTO> &dto) override;
   std::shared_ptr<DeviceEntityDTO> updateDeviceDTO() override;

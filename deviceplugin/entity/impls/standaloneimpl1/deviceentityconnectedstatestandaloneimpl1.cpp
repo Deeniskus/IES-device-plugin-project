@@ -264,3 +264,13 @@ GetInnerStartWidthResponse DeviceEntityConnectedStateStandaloneImpl1::getInnerSt
 
     return response;
 }
+
+GetInnerStartEnabledStatusResponse DeviceEntityConnectedStateStandaloneImpl1::getInnerStartEnabledStatus(GetInnerStartEnabledStatusRequest request) {
+    GetInnerStartEnabledStatusResponse response;
+
+    if (_reg_card != nullptr) {
+        response = _reg_card->getInnerStartEnabledStatus(request);
+    }
+
+    return response;
+}

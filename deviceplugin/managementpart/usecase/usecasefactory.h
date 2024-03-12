@@ -27,6 +27,7 @@
 
 #include "deviceplugin/managementpart/usecase/innerstart/getinnerstartperiodusecase.h"
 #include "deviceplugin/managementpart/usecase/innerstart/getinnerstartwidthusecase.h"
+#include "deviceplugin/managementpart/usecase/innerstart/getinnerstartenabledstatususecase.h"
 
 class UseCaseFactory: public QObject {
   Q_OBJECT
@@ -53,8 +54,9 @@ class UseCaseFactory: public QObject {
   std::shared_ptr<SetChannelStartSourceUseCase> createSetChannelStartSourceUseCase();
   std::shared_ptr<SetChannelStartModeUseCase> createSetChannelStartModeUseCase();
 
-    std::shared_ptr<GetInnerStartPeriodUseCase> createGetInnerStartPeriodUseCase();
-    std::shared_ptr<GetInnerStartWidthUseCase> createGetInnerStartWidthUseCase();
+  std::shared_ptr<GetInnerStartPeriodUseCase> createGetInnerStartPeriodUseCase();
+  std::shared_ptr<GetInnerStartWidthUseCase> createGetInnerStartWidthUseCase();
+  std::shared_ptr<GetInnerStartEnabledStatusUseCase> createGetInnerStartEnabledStatusUseCase();
 
 
     // TODO: Дописать методы создания и получения юзкейсов
@@ -83,6 +85,7 @@ class UseCaseFactory: public QObject {
 
   std::shared_ptr<GetInnerStartPeriodUseCase> _get_inner_start_period_use_case = nullptr;
   std::shared_ptr<GetInnerStartWidthUseCase> _get_inner_start_width_use_case = nullptr;
+  std::shared_ptr<GetInnerStartEnabledStatusUseCase> _get_inner_start_enabled_status_use_case = nullptr;
 };
 
 #endif //OU6UDEVICESTANDALONEPLUGIN_DEVICEPLUGIN_MANAGEMENTPART_USECASE_USECASEFACTORY_H_

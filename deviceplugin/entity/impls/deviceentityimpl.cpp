@@ -376,3 +376,13 @@ GetInnerStartWidthResponse DeviceEntityImpl::getInnerStartWidth(GetInnerStartWid
 
     return response;
 }
+
+GetInnerStartEnabledStatusResponse DeviceEntityImpl::getInnerStartEnabledStatus(GetInnerStartEnabledStatusRequest request) {
+    GetInnerStartEnabledStatusResponse response;
+
+    if (_current_state != nullptr) {
+        response = _current_state->getInnerStartEnabledStatus(request);
+    }
+
+    return response;
+}
