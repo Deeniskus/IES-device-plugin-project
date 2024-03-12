@@ -49,6 +49,7 @@ class DeviceController: public QObject {
   void channelInvertedStatusesModelChangedSlot(const QVector<bool> &value);
   void channelStartSourcesModelChangedSlot(const QVector<uint16_t> &value);
   void channelStartModesModelChangedSlot(const QVector<uint16_t> &value);
+  void innerStartPeriodModelChangedSlot(quint64 value);
 
 };
 

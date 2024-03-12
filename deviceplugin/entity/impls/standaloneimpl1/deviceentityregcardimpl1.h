@@ -40,6 +40,10 @@ class DeviceEntityRegCardImpl1: public DeviceEntityRegCard {
   SetChannelStartSourceResponse setChannelStartSource(SetChannelStartSourceRequest request) override;
   SetChannelStartModeResponse setChannelStartMode(SetChannelStartModeRequest request) override;
 
+
+  GetInnerStartPeriodResponse getInnerStartPeriod(GetInnerStartPeriodRequest request) override;
+
+
   int getChannelCount() override;
 
   void updateRegCard() override;

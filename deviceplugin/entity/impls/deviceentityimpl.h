@@ -50,6 +50,8 @@ class DeviceEntityImpl: public DeviceEntity {
   SetChannelStartSourceResponse setChannelStartSource(SetChannelStartSourceRequest request) override;
   SetChannelStartModeResponse setChannelStartMode(SetChannelStartModeRequest request) override;
 
+  GetInnerStartPeriodResponse getInnerStartPeriod(GetInnerStartPeriodRequest request) override;
+
   int getChannelCount() override;
 
   ErrorCode loadDeviceDTO(const std::shared_ptr<DeviceEntityDTO> &dto) override;

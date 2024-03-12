@@ -33,6 +33,8 @@ void DeviceEntityPoll::process() {
   SyncModuleStatusesPoll();
   SyncSFPStatusesPoll();
 
+  innerStartPeriodPoll();
+
   channelDelaysPoll();
   channelWidthsPoll();
   channelEnabledStatusesPoll();
@@ -234,22 +236,41 @@ void DeviceEntityPoll::channelInvertedStatusesPoll() {
 }
 
 void DeviceEntityPoll::channelNamesPoll() {
-  auto callback = _callback_sub_factory->getChannelNameCallback();
-  if (callback != nullptr && _device_entity != nullptr) {
-    int channel_count = _device_entity->getChannelCount();
+    auto callback = _callback_sub_factory->getChannelNameCallback();
+    if (callback != nullptr && _device_entity != nullptr) {
+        int channel_count = _device_entity->getChannelCount();
 
-    QVector<QString> values;
+        QVector<QString> values;
 
-    for (int i = 0; i < channel_count; i++) {
-      GetChannelNameRequest entity_request{i};
-      auto entity_response = _device_entity->getChannelName(entity_request);
+        for (int i = 0; i < channel_count; i++) {
+            GetChannelNameRequest entity_request{i};
+            auto entity_response = _device_entity->getChannelName(entity_request);
 
-      // TODO: Добавить здесь перехват ошибки
-      auto value = entity_response.result;
-      values.push_back(QString::fromStdString(value));
+            // TODO: Добавить здесь перехват ошибки
+            auto value = entity_response.result;
+            values.push_back(QString::fromStdString(value));
+        }
+
+        callback->pushEvent(values);
+        qDebug() << "CALLBACK CHANNEL DELAY PUSHED " << __func__;
     }
+}
 
-    callback->pushEvent(values);
-    qDebug() << "CALLBACK CHANNEL DELAY PUSHED " << __func__;
-  }
+void DeviceEntityPoll::innerStartPeriodPoll() {
+    if (_device_entity != nullptr) {
+        GetInnerStartPeriodRequest request{};
+        auto response = _device_entity->getInnerStartPeriod(request);
+
+        if (response.error_code != SUCCESS) {
+            // TODO: Здесь обработать ошибку
+            return;
+        }
+
+        if (_callback_sub_factory != nullptr) {
+            auto callback = _callback_sub_factory->getInnerStartPeriodCallback();
+            if (callback != nullptr) {
+                callback->pushEvent(response.result);
+            }
+        }
+    }
 }
